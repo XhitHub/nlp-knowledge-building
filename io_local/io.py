@@ -25,8 +25,15 @@ def tupleListToCsv(filename, data):
 def mapListToCsv(filename, mapsList):
   # data=[('smith, bob',2),('carol',3),('ted',4),('alice',5)]
   keys = set().union(*(d.keys() for d in mapsList))
+  print(keys)
+  keyList = list(keys)
+  print(keyList)
+  keyList.sort()
+  print(keyList)
   os.makedirs(os.path.dirname(filename), exist_ok=True)
-  with open(filename,'w') as out:
-    dict_writer = csv.DictWriter(out, keys)
+  # print('mapsList:')
+  # print(mapsList)
+  with open(filename,'w', newline='') as out:
+    dict_writer = csv.DictWriter(out, keyList)
     dict_writer.writeheader()
     dict_writer.writerows(mapsList)

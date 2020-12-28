@@ -21,4 +21,4 @@ def run():
   nlpSeqs = nlpc.textToNLPSequenceList(text)
   io.mapListToCsv(outProjectFolder + '/nlp_seqs.csv', nlpSeqs)
   nlpSeqs = nlpc.textToSimplifiedNLPSequenceList(text)
-  io.mapListToCsv(outProjectFolder + '/sim_nlp_seqs.csv', nlpSeqs)
+  io.mapListToCsv(outProjectFolder + '/nlp_seqs_sim.csv', nlpSeqs)

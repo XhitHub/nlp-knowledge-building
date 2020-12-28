@@ -1,37 +1,21 @@
-,_text,compound,ROOT_text,prep,det_text,nummod,preconj_text,appos_text,nsubj_text,dobj_text,amod_text,neg_text,relcl_text,nsubj,compound_text,relcl,conj,preconj,acomp,cc_text,expl,pobj_text,npadvmod,nummod_text,dep,appos,punct_text,conj_text,attr,advcl,attr_text,neg,ROOT,advmod,acomp_text,advmod_text,advcl_text,dobj,cc,npadvmod_text,amod,aux,expl_text,punct,aux_text,prep_text,pobj,text,dep_text,det
+,ROOT,ROOT_text,_is_fact,_is_query,_is_rule,_text,acomp,acomp2,acomp2_text,acomp3,acomp3_text,acomp_text,advcl,advcl_text,advmod,advmod2,advmod2_text,advmod3,advmod3_text,advmod_text,amod,amod2,amod2_text,amod3,amod3_text,amod4,amod4_text,amod_text,appos,appos2,appos2_text,appos_text,attr,attr_text,aux,aux_text,cc,cc_text,compound,compound2,compound2_text,compound_text,conj,conj2,conj2_text,conj3,conj3_text,conj4,conj4_text,conj5,conj5_text,conj_text,dep,dep2,dep2_text,dep_text,det,det2,det2_text,det3,det3_text,det4,det4_text,det5,det5_text,det_text,dobj,dobj2,dobj2_text,dobj_text,expl,expl_text,neg,neg_text,npadvmod,npadvmod_text,nsubj,nsubj2,nsubj2_text,nsubj_text,nummod,nummod_text,pcomp,pcomp_text,pobj,pobj2,pobj2_text,pobj3,pobj3_text,pobj4,pobj4_text,pobj5,pobj5_text,pobj6,pobj6_text,pobj_text,prep,prep2,prep2_text,prep3,prep3_text,prep4,prep4_text,prep5,prep5_text,prep6,prep6_text,prep_text,punct,punct2,punct2_text,punct3,punct3_text,punct4,punct4_text,punct5,punct5_text,punct6,punct6_text,punct7,punct7_text,punct8,punct8_text,punct9,punct9_text,punct_text,relcl,relcl_text
 "
-
-","
-
-",,go,by,,,,,I,,,,,-PRON-,,,,,,,,bus,,,,,.,,,,,,go,,,,,,,,,,,.,,by,bus,"I go to school by bus.
-
-",,
+",go,go,0,0,0,"
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,-PRON-,,,I,,,,,school,bus,bus,,,,,,,,,school,to,by,by,,,,,,,,,to,.,,,,,,,,,,,,,,,,,.,,
 "
-
-","
-
-",number,implements,for,This,,,,module,generators,various,,,module,number,,,,,,,distributions,pseudo,,,,.,,,,,,implement,,,,,generator,,pseudo,various,,,.,,for,distribution,"This module implements pseudo-random number generators for various distributions.
-
-",,this
-,,,uniform,from,a,,,,,selection,,,,,,,,,,,,range,,,,,.,,,,,,uniform,,,,,selection,,,,,,.,,from,range,"For integers, uniform selection from a range.",,a
+",implement,implements,0,0,0,"
+",,,,,,,,,,,,,,,random,various,various,,,,,random,,,,,,,,,,,number,,,number,,,,,,,,,,,,,,,this,,,,,,,,,This,generator,,,generators,,,,,pseudo,pseudo,module,,,module,,,,,distribution,,,,,,,,,,,distributions,for,,,,,,,,,,,for,-,.,.,,,,,,,,,,,,,,,-,,
+,selection,selection,0,0,0,"For integers, uniform selection from a range.",,,,,,,,,,,,,,,uniform,,,,,,,uniform,,,,,,,,,,,,,,,,,,,,,,,,,,,,,a,,,,,,,,,a,,,,,,,,,,,,,,,,,,,integer,range,range,,,,,,,,,integers,for,from,from,,,,,,,,,For,",",.,.,,,,,,,,,,,,,,,",",,
 "
-
-","
-
-",,selection,without,a,,,function,,permutation,random,,generate,,,generate,function,,,and,,replacement,,,,function,.,function,,,,,selection,,,,,permutation,and,,random,to,,.,to,without,replacement,"For sequences, uniform selection of a random element, a function to generate a random permutation of a list in-place, and a function for random sampling without replacement.
-
-",,a
-,,,are,on,the,,,Gaussian,,distributions,negative,,compute,,,compute,beta,,,and,there,line,,,,Gaussian,.,beta,function,,functions,,be,,,,,distribution,and,,negative,to,there,.,to,On,line,"On the real line, there are functions to compute uniform, normal (Gaussian), lognormal, negative exponential, gamma, and beta distributions.",,the
+",selection,selection,0,0,0,"
+",,,,,,,,,,,,,,,uniform,random,random,random,random,random,random,uniform,function,,,function,,,to,to,and,and,,,,,function,,,,,,,,,function,,,,,a,a,a,a,a,a,a,a,a,a,permutation,,,permutation,,,,,,,,,,,,,,,sequence,element,element,list,list,place,place,sampling,sampling,replacement,replacement,sequences,for,of,of,of,of,in,in,for,for,without,without,For,",",",",",",-,-,",",",",.,.,,,,,,,,,",",generate,generate
+,be,are,0,0,0,"On the real line, there are functions to compute uniform, normal (Gaussian), lognormal, negative exponential, gamma, and beta distributions.",,,,,,,,,,,,,,,real,normal,normal,lognormal,lognormal,negative,negative,real,,,,,function,functions,to,to,and,and,,,,,Gaussian,exponential,exponential,gamma,gamma,beta,beta,distribution,distributions,Gaussian,,,,,the,,,,,,,,,the,uniform,,,uniform,there,there,,,,,,,,,,,,,line,,,,,,,,,,,line,on,,,,,,,,,,,On,",",",",",",(,(,),),",",",",",",",",",",",",",",",",.,.,",",compute,compute
 "
-
-","
-
-",Mises,is,of,the,,,,distribution,,generating,,,distribution,Mises,,,,available,,,angles,,,,,.,,,,,,be,,available,,,,,,generate,,,.,,of,angle,"For generating distributions of angles, the von Mises distribution is available.
-
-",,the
-,,module,depend,in,the,all,,1.0,which,float,open,,generates,which,module,generate,,,,,,range,,all,-,1.0,.,,,,,,depend,uniformly,,uniformly,,float,,,open,,,.,,in,range,"Almost all module functions depend on the basic function random(), which generates a random float uniformly in the semi-open range [0.0, 1.0).",-,the
-,,core,uses,as,the,,,,Python,Twister,,,,Python,core,,,,,,,generator,,,,,.,,,,,,use,,,,,Twister,,,,,,.,,as,generator,Python uses the Mersenne Twister as the core generator.,,the
-,,precision,produces,1,a,53-bit,,,It,period,,,,-PRON-,precision,,have,,,and,,2**19937,,53-bit,,,.,has,,,,,produce,,,,,period,and,,,,,.,,1,2**19937,It produces 53-bit precision floats and has a period of 2**19937-1.,,a
-,,,is,in,The,,both,,implementation,,underlying,,,implementation,,,threadsafe,both,fast,and,,C,,,,,.,threadsafe,,,,,be,,fast,,,,and,,underlying,,,.,,in,C,The underlying implementation in C is both fast and threadsafe.,,the
-,,number,is,in,the,,,,Twister,,random,,,Twister,number,,,,,,,existence,,,,,.,,one,,one,,be,extensively,,extensively,,,,,random,,,.,,in,existence,The Mersenne Twister is one of the most extensively tested random number generators in existence.,,the
-,,,is,for,all,,,,it,,cryptographic,not,,-PRON-,,,be,,unsuitable,and,,purposes,,,,,.,is,,be,,not,be,completely,unsuitable,completely,being,,and,,cryptographic,,,.,,for,purpose,"However, being completely deterministic, it is not suitable for all purposes, and is completely unsuitable for cryptographic purposes.",,all
+",be,is,0,0,0,"
+",available,,,,,available,,,,,,,,,,,,,,,,,,,,,,,,,,,von,Mises,Mises,von,,,,,,,,,,,,,,,the,,,,,,,,,the,distribution,,,distributions,,,,,,,distribution,,,distribution,,,generate,generating,angle,,,,,,,,,,,angles,for,of,of,,,,,,,,,For,",",.,.,,,,,,,,,,,,,,,",",,
+,depend,depend,0,0,0,"Almost all module functions depend on the basic function random(), which generates a random float uniformly in the semi-open range [0.0, 1.0).",,,,,,,,,almost,uniformly,uniformly,,,Almost,basic,random,random,random,random,open,open,basic,0.0,1.0,1.0,0.0,,,,,,,module,,,module,,,,,,,,,,,semi,-,-,semi,the,a,a,the,the,,,,,the,float,,,float,,,,,,,function,which,which,functions,all,all,,,function,range,range,,,,,,,,,function,on,in,in,,,,,,,,,on,(,),),",",",",[,[,",",",",),),.,.,,,,,(,generate,generates
+,use,uses,0,0,0,Python uses the Mersenne Twister as the core generator.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Mersenne,core,core,Mersenne,,,,,,,,,,,,,,,the,the,the,,,,,,,the,Twister,,,Twister,,,,,,,Python,,,Python,,,,,generator,,,,,,,,,,,generator,as,,,,,,,,,,,as,.,,,,,,,,,,,,,,,,,.,,
+,produce,produces,0,0,0,It produces 53-bit precision floats and has a period of 2**19937-1.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,and,and,precision,,,precision,have,,,,,,,,,has,,,,,a,,,,,,,,,a,float,period,period,floats,,,,,,,-PRON-,,,It,53-bit,53-bit,,,2**19937,,,,,,,,,,,2**19937,of,1,1,,,,,,,,,of,-,.,.,,,,,,,,,,,,,,,-,,
+,be,is,0,0,0,The underlying implementation in C is both fast and threadsafe.,fast,,,,,fast,,,both,,,,,both,underlie,,,,,,,underlying,,,,,,,,,and,and,,,,,threadsafe,,,,,,,,,threadsafe,,,,,the,,,,,,,,,The,,,,,,,,,,,implementation,,,implementation,,,,,C,,,,,,,,,,,C,in,,,,,,,,,,,in,.,,,,,,,,,,,,,,,,,.,,
+,be,is,0,0,0,The Mersenne Twister is one of the most extensively tested random number generators in existence.,,,,,,,,,most,extensively,extensively,,,most,test,random,random,,,,,tested,,,,,one,one,,,,,Mersenne,number,number,Mersenne,,,,,,,,,,,,,,,the,the,the,,,,,,,The,,,,,,,,,,,Twister,,,Twister,,,,,generator,existence,existence,,,,,,,,,generators,of,in,in,,,,,,,,,of,.,,,,,,,,,,,,,,,,,.,,
+,be,is,0,0,0,"However, being completely deterministic, it is not suitable for all purposes, and is completely unsuitable for cryptographic purposes.",deterministic,suitable,suitable,unsuitable,unsuitable,deterministic,be,being,however,completely,completely,completely,completely,However,cryptographic,,,,,,,cryptographic,,,,,,,,,and,and,,,,,be,,,,,,,,,is,,,,,all,,,,,,,,,all,,,,,,,not,not,,,-PRON-,,,it,,,,,purpose,purpose,purposes,,,,,,,,,purposes,for,for,for,,,,,,,,,for,",",",",",",",",",",.,.,,,,,,,,,,,",",,

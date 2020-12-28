@@ -14,7 +14,10 @@ def textToSents(text):
 
 def getDefaultNLPDict():
   return {
-    'text': ''
+    '_is_fact': 0,
+    '_is_rule': 0,
+    '_is_query': 0,
+    '_text': '',
   }
 
 # in: text
@@ -31,17 +34,27 @@ def textToNLPDictsList(text):
     if (sent.text != ''):
       print('###############################################################')
       print('sent to process: ' + sent.text)
-      nlpDict = {'text': sent.text}
+      # nlpDict = {'_text': sent.text}
+      nlpDict = getDefaultNLPDict()
+      nlpDict['_text'] = sent.text
       for token in sent:
-        # if (!nlpDict[token.dep_])
-        nlpDict[token.dep_] = token.lemma_
-        nlpDict[token.dep_ + '_text'] = token.text
+        key = token.dep_
+        keyBase = token.dep_
+        keyI = 1
+        # add postfix if key dep_ already exists
+        while (nlpDict.get(key) != None):
+          keyI += 1
+          key = keyBase + str(keyI)
+        nlpDict[key] = token.lemma_
+        nlpDict[key + '_text'] = token.text
       print(nlpDict)
       res.append(nlpDict)
   return res
 
 def sentToNLPSequence(sent):
-  item = {'_text': sent.text}
+  # item = {'_text': sent.text}
+  item = getDefaultNLPDict()
+  item['_text'] = sent.text
   posSeq = ''
   tagSeq = ''
   depSeq = ''
