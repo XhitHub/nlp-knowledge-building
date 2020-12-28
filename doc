@@ -1,0 +1,86 @@
+test 3
+
+terms
+  lk: logic knowledge
+
+goals
+  extract lk from text
+  1
+    obtain model that identify parts of text as lk
+      1
+      text parts of nlp data is X ==> some parts of text is lk type A
+      transforming labeled training records to "text parts of nlp data is X ==> some parts of text is lk type A"
+        training records
+          1
+          text, selected section(s), lk type
+            determine (possible) selected words indexes based on selected section(s)
+          2
+          text, selected words indexes, lk type
+        may have nesting
+          a section is type rule
+            a subsection is type ruleLhs
+            a subsection is type ruleRhs
+    in operation
+      use trained model to identify parts that is lk
+      convert identified parts to lk
+        1
+        get lemma of identified parts/tokens
+          so identified parts need to be specific enough, allows determine which is which later
+        if token is coref / pronoun
+          get its represented things
+            1
+            from coref cluster
+              get text of the token
+              find represented thing from coref cluster
+            get lemma of represented thing if able
+        the lk extracted =
+          1
+          lemma seq
+          2
+          nlp data
+          3
+          nlp tree?
+  Summary
+    training record ids (Ids of "How training records should be")
+      1
+      for each sent:
+        X
+          text
+          text's selected part
+          NLP data
+            NLP seqs
+            dep parts list
+            parse tree
+        Y
+          text's selected part's logic knowledge type
+      for 1. whole paragraph, 2. whole article:
+        coref data
+          coref map in JSON
+            for usage of step 2 of "convert identified parts to lk" later
+          need to be able to identify which coref in which sent / parts of text belongs to a coref map entry
+      
+
+
+
+
+
+
+functions
+  cleaning
+    custom cleaning for diff sources
+      e.g. for wiki, for forum, etc
+
+tba
+  1
+  minimize use of ml
+    whenever possible, do things by codes, flows instead
+    ml is less reliable
+    unnecessary ml reduce reliability
+    
+  2
+    poss cleaning
+      1
+      lang art or tricks
+        generate poss lang arts applied
+        check with existing knowledge to find out the most probable one
+        where no lang art applied is one of the possibilities

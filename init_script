@@ -1,0 +1,38 @@
+env
+
+cpny PC:
+  use anaconda cmd's python
+
+
+
+
+spacy
+
+pip install -U spacy==2.1.0
+
+
+
+
+
+NLP
+
+PC
+py -m spacy download en_core_web_sm
+
+notebook / cpny PC
+python -m spacy download en_core_web_sm
+
+
+
+Repl.it:
+Ctrl shift s
+
+python3 -m spacy download en_core_web_sm
+
+
+
+
+
+neuralcoref
+
+pip install neuralcoref

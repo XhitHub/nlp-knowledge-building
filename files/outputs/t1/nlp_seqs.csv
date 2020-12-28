@@ -1,0 +1,29 @@
+_text,lemmaSeq,tagSeq,depSeq,posSeq
+"I go to school by bus.
+
+"," -PRON- go to school by bus . 
+
+", PRP VBP IN NN IN NN . _SP, nsubj ROOT prep pobj prep pobj punct , PRON VERB ADP NOUN ADP NOUN PUNCT SPACE
+"This module implements pseudo-random number generators for various distributions.
+
+"," this module implement pseudo - random number generator for various distribution . 
+
+", DT NN VBZ NN JJ JJ NN NNS IN JJ NNS . _SP, det nsubj ROOT npadvmod punct amod compound dobj prep amod pobj punct , DET NOUN VERB NOUN ADJ ADJ NOUN NOUN ADP ADJ NOUN PUNCT SPACE
+"For integers, uniform selection from a range."," for integer , uniform selection from a range ."," IN NNS , JJ NN IN DT NN .", prep pobj punct ROOT dobj prep det pobj punct, ADP NOUN PUNCT ADJ NOUN ADP DET NOUN PUNCT
+"For sequences, uniform selection of a random element, a function to generate a random permutation of a list in-place, and a function for random sampling without replacement.
+
+"," for sequence , uniform selection of a random element , a function to generate a random permutation of a list in - place , and a function for random sampling without replacement . 
+
+"," IN NNS , JJ NN IN DT JJ NN , DT NN TO VB DT JJ NN IN DT NN IN HYPH NN , CC DT NN IN JJ NN IN NN . _SP", prep pobj punct amod ROOT prep det amod pobj punct det appos aux relcl det amod dobj prep det pobj prep punct pobj punct cc det conj prep amod pobj prep pobj punct , ADP NOUN PUNCT ADJ NOUN ADP DET ADJ NOUN PUNCT DET NOUN PART VERB DET ADJ NOUN ADP DET NOUN ADP PUNCT NOUN PUNCT CCONJ DET NOUN ADP ADJ NOUN ADP NOUN PUNCT SPACE
+"On the real line, there are functions to compute uniform, normal (Gaussian), lognormal, negative exponential, gamma, and beta distributions."," on the real line , there be function to compute uniform , normal ( Gaussian ) , lognormal , negative exponential , gamma , and beta distribution ."," IN DT JJ NN , EX VBP NNS TO VB NN , JJ -LRB- NNP -RRB- , NNP , JJ NN , NN , CC NN NNS .", prep det amod pobj punct expl ROOT attr aux relcl amod punct amod punct appos punct punct conj punct amod conj punct conj punct cc conj dobj punct, ADP DET ADJ NOUN PUNCT PRON AUX NOUN PART VERB NOUN PUNCT ADJ PUNCT PROPN PUNCT PUNCT PROPN PUNCT ADJ NOUN PUNCT NOUN PUNCT CCONJ NOUN NOUN PUNCT
+"For generating distributions of angles, the von Mises distribution is available.
+
+"," for generate distribution of angle , the von Mises distribution be available . 
+
+"," IN VBG NNS IN NNS , DT NNP NNP NN VBZ JJ . _SP", prep amod pobj prep pobj punct det compound compound nsubj ROOT acomp punct , ADP VERB NOUN ADP NOUN PUNCT DET PROPN PROPN NOUN AUX ADJ PUNCT SPACE
+"Almost all module functions depend on the basic function random(), which generates a random float uniformly in the semi-open range [0.0, 1.0)."," almost all module function depend on the basic function random ( ) , which generate a random float uniformly in the semi - open range [ 0.0 , 1.0 ) ."," RB DT NN NNS VBP IN DT JJ NN NNP -LRB- -RRB- , WDT VBZ DT JJ NN RB IN DT JJ JJ JJ NN -LRB- CD , CD -RRB- .", advmod nummod compound nsubj ROOT prep det amod pobj amod punct punct punct nsubj relcl det amod dobj advmod prep det dep dep amod pobj punct appos punct appos punct punct, ADV DET NOUN NOUN VERB ADP DET ADJ NOUN PROPN PUNCT PUNCT PUNCT DET VERB DET ADJ NOUN ADV ADP DET ADJ ADJ ADJ NOUN PUNCT NUM PUNCT NUM PUNCT PUNCT
+Python uses the Mersenne Twister as the core generator., Python use the Mersenne Twister as the core generator ., NNP VBZ DT NNP NNP IN DT NN NN ., nsubj ROOT det compound dobj prep det compound pobj punct, PROPN VERB DET PROPN PROPN SCONJ DET NOUN NOUN PUNCT
+It produces 53-bit precision floats and has a period of 2**19937-1., -PRON- produce 53-bit precision float and have a period of 2**19937 - 1 ., PRP VBZ CD NN NNS CC VBZ DT NN IN CD SYM CD ., nsubj ROOT nummod compound dobj cc conj det dobj prep pobj punct prep punct, PRON VERB NUM NOUN NOUN CCONJ AUX DET NOUN ADP NUM SYM NUM PUNCT
+The underlying implementation in C is both fast and threadsafe., the underlying implementation in C be both fast and threadsafe ., DT JJ NN IN NNP VBZ CC JJ CC NN ., det amod nsubj prep pobj ROOT preconj acomp cc conj punct, DET ADJ NOUN ADP PROPN AUX CCONJ ADJ CCONJ NOUN PUNCT
+The Mersenne Twister is one of the most extensively tested random number generators in existence., the Mersenne Twister be one of the most extensively test random number generator in existence ., DT NNP NNP VBZ CD IN DT RBS RB VBN JJ NN NNS IN NN ., det compound nsubj ROOT attr prep det advmod advmod amod amod compound pobj prep pobj punct, DET PROPN PROPN AUX NUM ADP DET ADV ADV VERB ADJ NOUN NOUN ADP NOUN PUNCT
+"However, being completely deterministic, it is not suitable for all purposes, and is completely unsuitable for cryptographic purposes."," however , be completely deterministic , -PRON- be not suitable for all purpose , and be completely unsuitable for cryptographic purpose ."," RB , VBG RB JJ , PRP VBZ RB JJ IN DT NNS , CC VBZ RB JJ IN JJ NNS .", advmod punct advcl advmod acomp punct nsubj ROOT neg acomp prep det pobj punct cc conj advmod acomp prep amod pobj punct, ADV PUNCT AUX ADV ADJ PUNCT PRON AUX PART ADJ ADP DET NOUN PUNCT CCONJ AUX ADV ADJ ADP ADJ NOUN PUNCT

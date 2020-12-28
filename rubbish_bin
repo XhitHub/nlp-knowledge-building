@@ -1,0 +1,11 @@
+from pprint import pprint
+import nlp.nlp_controller as nlpc
+
+# doc = nlpc.textToNLP("John go to school by bus. I go to home on foot.")
+doc = nlpc.textToDoc("John go to school by bus.")
+
+nlpc.printDoc(doc)
+
+# pprint(dumps(doc))
+# pprint(doc.ents)
+# print(type(doc))
