@@ -34,6 +34,25 @@ python3 -m spacy download en_core_web_sm
 
 
 
+
+
 neuralcoref
 
-pip install neuralcoref
+  python -m pip install pipx
+  python -m pipx ensurepath
+
+  C:\Users\zekan\AppData\Roaming\Python\Python37\Scripts\pipx install virtualenv
+  C:\Users\zekan\.local\bin\virtualenv .env
+
+  pip install neuralcoref
+
+
+
+neuralcoref with spacy > 2.1:
+  git clone neuralcoref:
+    https://github.com/huggingface/neuralcoref.git
+  cd neuralcoref's cloned folder
+  pip install -r requirements.txt
+    installs requirements
+  pip install -e .
+    install the neuralcoref from source
