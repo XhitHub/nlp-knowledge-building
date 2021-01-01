@@ -1,5 +1,6 @@
 import csv
 import os
+import io
 
 def csvToList(filename):
   with open(filename, newline='') as f:
@@ -22,18 +23,24 @@ def tupleListToCsv(filename, data):
       for row in data:
           csv_out.writerow(row)
 
-def mapListToCsv(filename, mapsList):
+def mapListToCsv(filename, mapsList, mode='w'):
   # data=[('smith, bob',2),('carol',3),('ted',4),('alice',5)]
   keys = set().union(*(d.keys() for d in mapsList))
-  print(keys)
+  # print(keys)
   keyList = list(keys)
-  print(keyList)
+  # print(keyList)
   keyList.sort()
-  print(keyList)
+  # print(keyList)
   os.makedirs(os.path.dirname(filename), exist_ok=True)
   # print('mapsList:')
   # print(mapsList)
-  with open(filename,'w', newline='') as out:
-    dict_writer = csv.DictWriter(out, keyList)
-    dict_writer.writeheader()
-    dict_writer.writerows(mapsList)
+
+  # with open(filename, mode, newline='') as out:
+  #   dict_writer = csv.DictWriter(out, keyList)
+  #   dict_writer.writeheader()
+  #   dict_writer.writerows(mapsList)
+
+  f = io.open(filename, mode=mode, newline='', encoding="utf-8")
+  dict_writer = csv.DictWriter(f, keyList)
+  dict_writer.writeheader()
+  dict_writer.writerows(mapsList)

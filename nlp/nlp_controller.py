@@ -4,7 +4,11 @@ import neuralcoref
 
 langModel = "en_core_web_sm"
 nlp = spacy.load(langModel)
+# add pipes
 neuralcoref.add_to_pipe(nlp)
+sentencizer = nlp.create_pipe('sentencizer')
+sentencizer.__init__([','])
+nlp.add_pipe(sentencizer)
 
 def textToDoc(text):
   doc = nlp(text)
@@ -100,8 +104,11 @@ def getNonRepeatedCorefLemma(i, tokens):
         if (coref.start == prevCoref.start and coref.end == prevCoref.end):
           # is repeated coref, omit
           return ''
+        else:
+          # is new coref, return
+          return ' ' + getCorefLemma(token)
       else:
-        return ' ' + coref.lemma_
+        return ' ' + getCorefLemma(token)
     else:
       return ' ' + token.lemma_
   else:
