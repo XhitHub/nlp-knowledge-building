@@ -4,9 +4,10 @@ import _tests.t2 as appTest
 import projects.all_the_news.control as atnControl
 
 # testings
-app.run()
+# app.run()
 # t1.run()
 
 
 # real deal
-# atnControl.classifyNLP()
+# atnControl.dataSourceToNLP()
+atnControl.classifyNLP('posSeq_d4')

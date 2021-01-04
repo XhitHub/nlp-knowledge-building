@@ -6,6 +6,7 @@ langModel = "en_core_web_sm"
 nlp = spacy.load(langModel)
 # add pipes
 neuralcoref.add_to_pipe(nlp)
+# comma sentencizer is exec after coref
 sentencizer = nlp.create_pipe('sentencizer')
 sentencizer.__init__([','])
 nlp.add_pipe(sentencizer)
@@ -58,27 +59,27 @@ def textToNLPDictsList(text):
       res.append(nlpDict)
   return res
 
-def sentToNLPSequence(sent):
+def tokensToNLPSequence(tokens, postfix=''):
   # item = {'_text': sent.text}
   item = getDefaultNLPDict()
-  item['_text'] = sent.text
+  # item['_text'] = sent.text
   posSeq = ''
   tagSeq = ''
   depSeq = ''
   lemmaSeq = ''
   corefLemmaSeq = ''
-  for i, token in enumerate(sent):
+  for i, token in enumerate(tokens):
     posSeq += ' ' + token.pos_
     tagSeq += ' ' + token.tag_
     depSeq += ' ' + token.dep_
     lemmaSeq += ' ' + token.lemma_
     # corefLemmaSeq += ' ' + getCorefLemma(token)
-    corefLemmaSeq += getNonRepeatedCorefLemma(i, sent)
-  item['posSeq'] = posSeq
-  item['tagSeq'] = tagSeq
-  item['depSeq'] = depSeq
-  item['lemmaSeq'] = lemmaSeq
-  item['corefLemmaSeq'] = corefLemmaSeq
+    corefLemmaSeq += getNonRepeatedCorefLemma(i, tokens)
+  item['posSeq' + postfix] = posSeq
+  item['tagSeq' + postfix] = tagSeq
+  item['depSeq' + postfix] = depSeq
+  item['lemmaSeq' + postfix] = lemmaSeq
+  item['corefLemmaSeq' + postfix] = corefLemmaSeq
   return item
 
 def getCorefLemma(token):
@@ -115,22 +116,66 @@ def getNonRepeatedCorefLemma(i, tokens):
     return ' ' + getCorefLemma(token)
 
 
-def textToNLPSequenceList(text):
-  doc = nlp(text)
+def docToNLPSequenceList(doc):
   res = []
   for sent in doc.sents:
     if(sent.text != ''):
-      item = sentToNLPSequence(sent)
+      item = tokensToNLPSequence(sent)
+      item['_text'] = sent.text
       res.append(item)
   return res
 
-def textToSimplifiedNLPSequenceList(text):
-  doc = nlp(text)
+def docToMaxDepthsTreeNLPSequenceList(doc, maxDepths):
   res = []
   for sent in doc.sents:
     if(sent.text != ''):
+      finalItem = {}
+      finalItem['_text'] = sent.text
+      for maxDepth in maxDepths:
+        postfix = '_d' + str(maxDepth)
+        nlpTreeTraverseTokens = sentToMaxDepthTree(sent, maxDepth)
+        item = tokensToNLPSequence(nlpTreeTraverseTokens, postfix)
+        finalItem = {**finalItem, **item}
+      res.append(finalItem)
+  return res
+
+def docToMaxDepthTreeNLPSequenceList(doc, maxDepth):
+  res = []
+  for sent in doc.sents:
+    if(sent.text != ''):
+      nlpTreeTraverseTokens = sentToMaxDepthTree(sent, maxDepth)
+      item = tokensToNLPSequence(nlpTreeTraverseTokens)
+      item['_text'] = sent.text
+      res.append(item)
+  return res
+
+def sentToMaxDepthTree(sent, maxDepth):
+  sentRoots = getNoParentTokens(sent)
+  resTokens = []
+  for sentRoot in sentRoots:
+    addTreeNodesMaxDepth(resTokens, sentRoot, maxDepth)
+  return resTokens
+
+def addTreeNodesMaxDepth(resList, treeRoot, maxDepth):
+  # mid first traverse
+  if maxDepth == 0:
+    return
+  else:
+    resList.append(treeRoot)
+    # recurse children
+    if (treeRoot.children is not None):
+      for child in treeRoot.children:
+        addTreeNodesMaxDepth(resList, child, maxDepth-1)
+
+
+def docToSimplifiedNLPSequenceList(doc):
+  res = []
+  for sent in doc.sents:
+    if(sent.text != ''):
+      # simple sent
       sent = simplifySent(sent)
-      item = sentToNLPSequence(sent)
+      item = tokensToNLPSequence(sent)
+      item['_text'] = sent.text
       res.append(item)
   return res
 
@@ -150,6 +195,7 @@ def getNoParentTokens(sent):
   return noParentTokens
   
 # sent processing
+# TODO: simplify by working on NLP doc instead of change to string back and forth
 def simplifySent(sent):
   text = sent.text
   for chunk in sent.noun_chunks:

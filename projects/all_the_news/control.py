@@ -15,28 +15,27 @@ ROOT = 'projects/all_the_news/data'
 inFilename = 'articles1.csv'
 outFilename = 'articles1_NLPSEQ.csv'
 reportFilename = 'articles1_NLPSEQ_report.txt'
+maxDepths = range(3,7)
 
 def dataSourceToNLP():
   df = pd.read_csv(ROOT + '/'+inFilename)
   sizeStr = str(len(df.index))
   # try Vectorization later
-  # for row in df.itertuples():
   for index, row in df.iterrows():
     text = cleanText(row['content'])
-    # print('##############################################################################################################################')
-    # print('processing: ' + text)
-
+    doc = nlpc.textToDoc(text)
     print(str(index) + '/' + sizeStr)
-    nlpSeqs = nlpc.textToNLPSequenceList(text)
+    # nlpSeqs = nlpc.docToMaxDepthTreeNLPSequenceList(doc, 4)
+    nlpSeqs = nlpc.docToMaxDepthsTreeNLPSequenceList(doc, maxDepths)
     io.mapListToCsv(ROOT + '/results/' + outFilename, nlpSeqs, 'a')
 
-def classifyNLP():
+def classifyNLP(featureForGrouping):
   res = {}
   df = pd.read_csv(ROOT + '/results/' + outFilename)
   sizeStr = str(len(df.index))
   for index, row in df.iterrows():
     print(str(index) + '/' + sizeStr)
-    posSeq = row['posSeq']
+    posSeq = row[featureForGrouping]
     if (res.get(posSeq) == None):
       # is new posSeq entry
       res[posSeq] = 1
@@ -53,15 +52,26 @@ def cleanText(text):
 
 # depracated
 
-def dataSourceToNLP_v1():
-  df = pd.read_csv(ROOT + '/'+inFilename)
-  sizeStr = str(len(df.index))
-  # try Vectorization later
-  # for row in df.itertuples():
-  for index, row in df.iterrows():
-    text = cleanText(row['content'])
-    # print('##############################################################################################################################')
-    # print('processing: ' + text)
-    print(str(index) + '/' + sizeStr)
-    nlpSeqs = nlpc.textToNLPSequenceList(text)
-    io.mapListToCsv(ROOT + '/results/' + outFilename, nlpSeqs, 'a')
+# def dataSourceToNLP_v1():
+#   df = pd.read_csv(ROOT + '/'+inFilename)
+#   sizeStr = str(len(df.index))
+#   # try Vectorization later
+#   # for row in df.itertuples():
+#   for index, row in df.iterrows():
+#     text = cleanText(row['content'])
+#     # print('##############################################################################################################################')
+#     # print('processing: ' + text)
+#     print(str(index) + '/' + sizeStr)
+#     nlpSeqs = nlpc.textToNLPSequenceList(text)
+#     io.mapListToCsv(ROOT + '/results/' + outFilename, nlpSeqs, 'a')
+
+
+# def dataSourceToNLP_v2():
+#   df = pd.read_csv(ROOT + '/'+inFilename)
+#   sizeStr = str(len(df.index))
+#   # try Vectorization later
+#   for index, row in df.iterrows():
+#     text = cleanText(row['content'])
+#     print(str(index) + '/' + sizeStr)
+#     nlpSeqs = nlpc.textToNLPSequenceList(text)
+#     io.mapListToCsv(ROOT + '/results/' + outFilename, nlpSeqs, 'a')
