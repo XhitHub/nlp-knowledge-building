@@ -193,6 +193,28 @@ def getNoParentTokens(sent):
     if (hasNoParent):
       noParentTokens.append(token)
   return noParentTokens
+
+def parseTreeToDict(rootNodes, currDepth, maxChild, maxDepth):
+  resDict = {}
+  recursiveParseTreeToDict(resDict, rootNodes, 0, maxChild, maxDepth)
+  return resDict
+
+
+def recursiveParseTreeToDict(resDict, rootNodes, currDepth, maxChild, maxDepth):
+  if currDepth == maxDepth:
+    return
+  if rootNodes == None:
+    return
+  for i,node in enumerate(rootNodes[:maxChild]):
+    prefix = str(currDepth) + '-' + str(i) + '_'
+    resDict[prefix + 'dep_'] = node.dep_
+    resDict[prefix + 'pos_'] = node.pos_
+    resDict[prefix + 'tag_'] = node.tag_
+    resDict[prefix + 'lemma_'] = node.lemma_
+    resDict[prefix + 'corefLemma_'] = node._.coref_clusters[0].main.corefLemma_
+    recursiveParseTreeToDict(resDict, node.children[:maxChild], currDepth + 1, maxChild, maxDepth)
+  
+
   
 # sent processing
 # TODO: simplify by working on NLP doc instead of change to string back and forth
@@ -202,10 +224,10 @@ def simplifySent(sent):
     text = text.replace(chunk.text, chunk.root.text, 1)
   return nlp(text)
 
-def sentToDepTree(sent):
-  tree = {}
+# def sentToDepTree(sent):
+#   tree = {}
   
-  return tree
+#   return tree
 
 def printDoc(doc):
   for sent in doc.sents:
