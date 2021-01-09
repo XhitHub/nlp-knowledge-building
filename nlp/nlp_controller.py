@@ -3,6 +3,7 @@ import spacy
 import neuralcoref
 
 langModel = "en_core_web_sm"
+
 nlp = spacy.load(langModel)
 # add pipes
 neuralcoref.add_to_pipe(nlp)
@@ -125,6 +126,16 @@ def docToNLPSequenceList(doc):
       res.append(item)
   return res
 
+def docToParseTreeDictList(doc, maxChild, maxDepth):
+  res = []
+  for sent in doc.sents:
+    if(sent.text != ''):
+      # item = sentToParseTreeDict(sent, maxChild, maxDepth)
+      item = sentToParseTreeDict(sent)
+      item['_text'] = sent.text
+      res.append(item)
+  return res
+
 def docToMaxDepthsTreeNLPSequenceList(doc, maxDepths):
   res = []
   for sent in doc.sents:
@@ -194,13 +205,35 @@ def getNoParentTokens(sent):
       noParentTokens.append(token)
   return noParentTokens
 
-def parseTreeToDict(rootNodes, currDepth, maxChild, maxDepth):
+def sentToParseTreeDict(sent):
+  rootNodes = getNoParentTokens(sent)
   resDict = {}
-  recursiveParseTreeToDict(resDict, rootNodes, 0, maxChild, maxDepth)
+  recursiveParseTreeToDict(resDict, rootNodes, 0)
   return resDict
 
 
-def recursiveParseTreeToDict(resDict, rootNodes, currDepth, maxChild, maxDepth):
+def recursiveParseTreeToDict(resDict, rootNodes, currDepth):
+  if rootNodes == None:
+    return
+  for i,node in enumerate(rootNodes):
+    prefix = str(currDepth) + '-' + str(i) + '_'
+    resDict[prefix + 'dep_'] = node.dep_
+    resDict[prefix + 'pos_'] = node.pos_
+    resDict[prefix + 'tag_'] = node.tag_
+    resDict[prefix + 'lemma_'] = node.lemma_
+    # resDict[prefix + 'corefLemma_'] = node._.coref_clusters[0].main.corefLemma_
+    resDict[prefix + 'corefLemma_'] = getCorefLemma(node)    
+    recursiveParseTreeToDict(resDict, node.children, currDepth + 1)
+  
+
+def sentToParseTreeDictLimited(sent, maxChild, maxDepth):
+  rootNodes = getNoParentTokens(sent)
+  resDict = {}
+  recursiveParseTreeToDictLimited(resDict, rootNodes, 0, maxChild, maxDepth)
+  return resDict
+
+
+def recursiveParseTreeToDictLimited(resDict, rootNodes, currDepth, maxChild, maxDepth):
   if currDepth == maxDepth:
     return
   if rootNodes == None:
@@ -212,8 +245,7 @@ def recursiveParseTreeToDict(resDict, rootNodes, currDepth, maxChild, maxDepth):
     resDict[prefix + 'tag_'] = node.tag_
     resDict[prefix + 'lemma_'] = node.lemma_
     resDict[prefix + 'corefLemma_'] = node._.coref_clusters[0].main.corefLemma_
-    recursiveParseTreeToDict(resDict, node.children[:maxChild], currDepth + 1, maxChild, maxDepth)
-  
+    recursiveParseTreeToDictLimited(resDict, node.children[:maxChild], currDepth + 1, maxChild, maxDepth)
 
   
 # sent processing

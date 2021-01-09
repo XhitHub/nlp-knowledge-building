@@ -13,9 +13,12 @@ import nlp.nlp_controller as nlpc
 
 ROOT = 'projects/all_the_news/data'
 inFilename = 'articles1.csv'
-outFilename = 'articles1_NLPSEQ.csv'
+# outFilename = 'articles1_NLPSEQ.csv'
+outFilename = 'articles1_PARSE_TREE_DICT.csv'
 reportFilename = 'articles1_NLPSEQ_report.txt'
 maxDepths = range(3,7)
+MAX_CHILD = 5
+MAX_DEPTH = 7
 
 def dataSourceToNLP():
   df = pd.read_csv(ROOT + '/'+inFilename)
@@ -26,7 +29,8 @@ def dataSourceToNLP():
     doc = nlpc.textToDoc(text)
     print(str(index) + '/' + sizeStr)
     # nlpSeqs = nlpc.docToMaxDepthTreeNLPSequenceList(doc, 4)
-    nlpSeqs = nlpc.docToMaxDepthsTreeNLPSequenceList(doc, maxDepths)
+    # nlpSeqs = nlpc.docToMaxDepthsTreeNLPSequenceList(doc, maxDepths)
+    nlpSeqs = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
     io.mapListToCsv(ROOT + '/results/' + outFilename, nlpSeqs, 'a')
 
 def classifyNLP(featureForGrouping):
