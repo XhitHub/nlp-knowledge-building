@@ -16,31 +16,28 @@ def textFileToString(filename):
   return res
 
 def tupleListToCsv(filename, data):
-  # data=[('smith, bob',2),('carol',3),('ted',4),('alice',5)]
   with open(filename,'w') as out:
       csv_out=csv.writer(out)
       # csv_out.writerow(['name','num'])
       for row in data:
           csv_out.writerow(row)
 
-def mapListToCsv(filename, mapsList, mode='w'):
-  # data=[('smith, bob',2),('carol',3),('ted',4),('alice',5)]
-  keys = set().union(*(d.keys() for d in mapsList))
-  # print(keys)
-  keyList = list(keys)
-  # print(keyList)
-  keyList.sort()
-  # print(keyList)
+def mapListToCsv(filename, mapsList, mode='w', header=None, writeheader=False):
   os.makedirs(os.path.dirname(filename), exist_ok=True)
-  # print('mapsList:')
-  # print(mapsList)
-
-  # with open(filename, mode, newline='') as out:
-  #   dict_writer = csv.DictWriter(out, keyList)
-  #   dict_writer.writeheader()
-  #   dict_writer.writerows(mapsList)
-
+  if (header == None):
+    keys = set().union(*(d.keys() for d in mapsList))
+    keyList = list(keys)
+    keyList.sort()
+  else:
+    keyList = header
   f = io.open(filename, mode=mode, newline='', encoding="utf-8")
   dict_writer = csv.DictWriter(f, keyList)
-  dict_writer.writeheader()
+  if writeheader:
+    dict_writer.writeheader()
   dict_writer.writerows(mapsList)
+
+def getHeaderFromMapList(mapsList):
+  keys = set().union(*(d.keys() for d in mapsList))
+  keyList = list(keys)
+  keyList.sort()
+  return keyList

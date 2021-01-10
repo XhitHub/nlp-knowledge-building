@@ -30,8 +30,34 @@ def dataSourceToNLP():
     print(str(index) + '/' + sizeStr)
     # nlpSeqs = nlpc.docToMaxDepthTreeNLPSequenceList(doc, 4)
     # nlpSeqs = nlpc.docToMaxDepthsTreeNLPSequenceList(doc, maxDepths)
-    nlpSeqs = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
-    io.mapListToCsv(ROOT + '/results/' + outFilename, nlpSeqs, 'a')
+    treeDicts = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
+    io.mapListToCsv(ROOT + '/results/' + outFilename, treeDicts, 'a')
+
+def dataSourceUnevenHeaderToNLP(headerSampleCount=10, writeHeader=True):
+  df = pd.read_csv(ROOT + '/'+inFilename)
+  sizeStr = str(len(df.index))
+  headerSampleMaplist = []
+  # get header from sampling
+  # try Vectorization later
+  if writeHeader:
+    for index, row in df.iterrows():
+      if(index > headerSampleCount):
+        break
+      text = cleanText(row['content'])
+      doc = nlpc.textToDoc(text)
+      print(str(index) + '/' + sizeStr)
+      treeDicts = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
+      headerSampleMaplist.extend(treeDicts)
+    sampledHeader = io.getHeaderFromMapList(headerSampleMaplist)
+    # write header
+    io.mapListToCsv(ROOT + '/results/' + outFilename, [], 'a', header=sampledHeader)
+  for index, row in df.iterrows():
+    text = cleanText(row['content'])
+    doc = nlpc.textToDoc(text)
+    print(str(index) + '/' + sizeStr)
+    treeDicts = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
+    io.mapListToCsv(ROOT + '/results/' + outFilename, treeDicts, 'a', header=sampledHeader)
+
 
 def classifyNLP(featureForGrouping):
   res = {}
