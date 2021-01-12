@@ -15,6 +15,7 @@ ROOT = 'projects/all_the_news/data'
 inFilename = 'articles1.csv'
 # outFilename = 'articles1_NLPSEQ.csv'
 outFilename = 'articles1_PARSE_TREE_DICT.csv'
+outFilename_write = 'articles1_PARSE_TREE_DICT_WRITE.csv'
 reportFilename = 'articles1_NLPSEQ_report.txt'
 maxDepths = range(3,7)
 MAX_CHILD = 5
@@ -32,6 +33,23 @@ def dataSourceToNLP():
     # nlpSeqs = nlpc.docToMaxDepthsTreeNLPSequenceList(doc, maxDepths)
     treeDicts = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
     io.mapListToCsv(ROOT + '/results/' + outFilename, treeDicts, 'a')
+
+def dataSourceUnevenHeaderToNLP_v2(stopAt=100):
+  df = pd.read_csv(ROOT + '/'+inFilename)
+  sizeStr = str(len(df.index))
+  treeDicts = []
+  # try Vectorization later
+  for index, row in df.iterrows():
+    if(index > stopAt):
+        break
+    text = cleanText(row['content'])
+    doc = nlpc.textToDoc(text)
+    print(str(index) + '/' + sizeStr)
+    # nlpSeqs = nlpc.docToMaxDepthTreeNLPSequenceList(doc, 4)
+    # nlpSeqs = nlpc.docToMaxDepthsTreeNLPSequenceList(doc, maxDepths)
+    tempTreeDicts = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
+    treeDicts.extend(tempTreeDicts)
+  io.mapListToCsv(ROOT + '/results/' + outFilename_write, treeDicts, 'w')
 
 def dataSourceUnevenHeaderToNLP(headerSampleCount=10, writeHeader=True):
   df = pd.read_csv(ROOT + '/'+inFilename)

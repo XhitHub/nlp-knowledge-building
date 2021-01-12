@@ -10,5 +10,6 @@ import projects.all_the_news.control as atnControl
 
 # real deal
 # atnControl.dataSourceToNLP()
-atnControl.dataSourceUnevenHeaderToNLP()
+# atnControl.dataSourceUnevenHeaderToNLP()
+atnControl.dataSourceUnevenHeaderToNLP_v2(100)
 # atnControl.classifyNLP('posSeq_d4')
