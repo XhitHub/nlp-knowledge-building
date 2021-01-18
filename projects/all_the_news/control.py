@@ -32,7 +32,7 @@ def dataSourceToNLP():
     # nlpSeqs = nlpc.docToMaxDepthTreeNLPSequenceList(doc, 4)
     # nlpSeqs = nlpc.docToMaxDepthsTreeNLPSequenceList(doc, maxDepths)
     treeDicts = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
-    io.mapListToCsv(ROOT + '/results/' + outFilename, treeDicts, 'a')
+    io.mapListToCsv(ROOT + '/results/' + outFilename, treeDicts, 'a', writeheader=True)
 
 def dataSourceUnevenHeaderToNLP_v2(stopAt=100):
   df = pd.read_csv(ROOT + '/'+inFilename)
@@ -49,7 +49,7 @@ def dataSourceUnevenHeaderToNLP_v2(stopAt=100):
     # nlpSeqs = nlpc.docToMaxDepthsTreeNLPSequenceList(doc, maxDepths)
     tempTreeDicts = nlpc.docToParseTreeDictList(doc, MAX_CHILD, MAX_DEPTH)
     treeDicts.extend(tempTreeDicts)
-  io.mapListToCsv(ROOT + '/results/' + outFilename_write, treeDicts, 'w')
+  io.mapListToCsv(ROOT + '/results/' + outFilename_write, treeDicts, 'w', writeheader=True)
 
 def dataSourceUnevenHeaderToNLP(headerSampleCount=10, writeHeader=True):
   df = pd.read_csv(ROOT + '/'+inFilename)
